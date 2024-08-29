@@ -1,13 +1,16 @@
 import { Sequelize } from "sequelize-typescript";
 import { Product } from "../models/data.model";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const connection = new Sequelize({
   dialect: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "postgres",
-  password: "0000",
-  database: "data_db",
+  host: process.env.HOST,
+  port: Number(process.env.PORT),
+  username: process.env.DB_USERNAME,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
   models: [Product],
 });
 
