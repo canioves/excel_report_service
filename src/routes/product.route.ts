@@ -10,8 +10,14 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 router.get("/bulk", async (req: Request, res: Response) => {
-  await productController.createProductsFromJson(req, res);
-  return res.status(200).json({ message: "Products created" });
+  try {
+    await productController.createProductsFromJson();
+    return res.status(200).json({ message: "Products created" });
+  }
+  catch(error: any) {
+    return res.status(500).json({ message: error.message });
+  }
+  
 });
 
 export default router;

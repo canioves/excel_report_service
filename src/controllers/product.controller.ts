@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Product } from "../models/data.model";
+import { Product } from "../models/product.model";
 import bulk from "../test_data/bulk.json";
 
 export class ProductController {
@@ -9,7 +9,7 @@ export class ProductController {
     const offset: number = (page - 1) * limit;
 
     const pageOfProducts: Product[] = await Product.findAll({ offset, limit });
-    const totalProducts: number = limit;
+    const totalProducts: number = pageOfProducts.length;
 
     const productsJSON: Object = {
       page,
@@ -20,7 +20,7 @@ export class ProductController {
     return productsJSON;
   }
 
-  async createProductsFromJson(req: Request, res: Response): Promise<void> {
+  async createProductsFromJson(): Promise<void> {
     await Product.bulkCreate(bulk);
   }
 }
