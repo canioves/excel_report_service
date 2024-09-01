@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { Column, Table, Model } from "sequelize-typescript";
+import { Column, Model, Table } from "sequelize-typescript";
 
 interface CreateProductAttrs {
   name: string;
@@ -8,7 +8,7 @@ interface CreateProductAttrs {
   stock: number;
 }
 
-@Table({ timestamps: false, tableName: "Products" })
+@Table({ tableName: "Products", timestamps: false })
 export class Product extends Model<Product, CreateProductAttrs> {
   @Column({ type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true })
   id!: number;

@@ -5,8 +5,8 @@ const router = express.Router();
 const productController = new ProductController();
 
 router.get("/", async (req: Request, res: Response) => {
-  const products = await productController.getAllProducts();
-  return res.status(200).json(products);
+  const productsJSON = await productController.getPageOfProducts(req);
+  return res.status(200).json(productsJSON);
 });
 
 router.get("/bulk", async (req: Request, res: Response) => {
